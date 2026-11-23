@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nico MP4 — Portfolio Montage Vidéo</title>
+<meta name="description" content="Portfolio de Nico MP4, monteur vidéo : showreel, packs SFX gratuits et contact.">
+<meta property="og:title" content="Nico MP4 — Portfolio Montage Vidéo">
+<meta property="og:description" content="Showreel, packs SFX gratuits et contact.">
+<meta property="og:image" content="assets/portrait.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#03045E;   /* Ocean Blue */
+    --blue:#0277B6;
+    --cyan:#48CBE4;
+    --ice:#CBF0F8;
+    --black:#02030a;
+    --display:"Bebas Neue","Anton","Impact","Arial Narrow",sans-serif;
+    --text:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:70px}
+  body{background:var(--black);color:#fff;font-family:var(--text);line-height:1.6;overflow-x:hidden}
+  a{color:inherit}
+
+  /* ---------- Navigation ---------- */
+  .nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+       padding:18px clamp(20px,4vw,64px);background:rgba(2,3,10,.78);
+       -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid rgba(72,203,228,.12)}
+  .logo{font-family:var(--display);font-size:34px;letter-spacing:.06em;color:#fff;text-decoration:none}
+  .menu{display:flex;gap:clamp(18px,5vw,84px);list-style:none}
+  .menu a{color:#fff;font-size:15px;font-weight:500;text-decoration:none;transition:color .2s}
+  .menu a:hover{color:var(--cyan)}
+  .nav-spacer{width:120px}
+
+  /* ---------- Hero : le titre passe derrière le portrait ---------- */
+  .hero{position:relative;height:100vh;min-height:620px;overflow:hidden;
+        background:
+          radial-gradient(60% 70% at 88% 40%,rgba(3,4,94,.95) 0%,rgba(3,4,94,.35) 45%,transparent 70%),
+          radial-gradient(40% 50% at 8% 90%,rgba(2,119,182,.18) 0%,transparent 70%),
+          var(--black)}
+  .hero h1{position:absolute;z-index:1;left:0;right:0;top:30vh;text-align:center;
+           font-family:var(--display);font-weight:400;text-transform:uppercase;
+           font-size:min(52vh,19vw);line-height:.8;letter-spacing:.13em;color:#fff;
+           white-space:nowrap;padding-left:.13em}
+  .hero .portrait{position:absolute;z-index:2;left:50%;bottom:-2vh;transform:translateX(-50%);
+                  height:min(86vh,104vw);width:auto;max-width:none;pointer-events:none;user-select:none}
+  .hero::after{content:"";position:absolute;z-index:3;left:0;right:0;bottom:0;height:22vh;
+               background:linear-gradient(180deg,transparent,var(--black) 92%);pointer-events:none}
+  .hero-foot{position:absolute;z-index:4;left:clamp(20px,4vw,64px);right:clamp(20px,4vw,64px);bottom:28px;
+             display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:2px;text-align:center;font-size:15px;font-weight:500;color:#fff;opacity:.35}
+  .scroll{position:absolute;z-index:4;left:50%;bottom:24px;transform:translateX(-50%);text-align:center;
+          font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--ice);opacity:.8}
+  .scroll::after{content:"";display:block;width:1px;height:34px;margin:8px auto 0;background:linear-gradient(var(--cyan),transparent)}
+
+  /* ---------- Sections ---------- */
+  section.block{padding:clamp(80px,12vw,150px) clamp(20px,6vw,96px);max-width:1400px;margin:0 auto}
+  .eyebrow{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
+  .eyebrow::before{content:"";width:38px;height:1px;background:var(--cyan)}
+  h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(64px,11vw,150px);line-height:.9;letter-spacing:.03em}
+  .lead{color:var(--ice);max-width:46ch;font-size:clamp(15px,1.4vw,18px)}
+  .head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:48px}
+
+  /* Showreel */
+  .frame{position:relative;border:1px solid var(--blue);border-radius:6px;overflow:hidden;background:#000;
+         box-shadow:0 0 0 1px rgba(72,203,228,.08),0 30px 90px rgba(3,4,94,.55)}
+  .frame video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+
+  /* À propos */
+  .about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,90px);align-items:center}
+  .about p{color:var(--ice);font-size:clamp(16px,1.6vw,20px);margin-bottom:18px}
+  .about .line{width:64px;height:2px;background:linear-gradient(90deg,var(--navy),var(--cyan));margin:26px 0}
+
+  /* SFX */
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+  .card{display:flex;flex-direction:column;justify-content:space-between;gap:26px;min-height:190px;padding:24px;
+        border:1px solid rgba(72,203,228,.45);border-radius:8px;
+        background:linear-gradient(160deg,rgba(3,4,94,.85),rgba(2,3,10,.9));
+        transition:transform .25s,border-color .25s,box-shadow .25s}
+  .card:hover{transform:translateY(-4px);border-color:var(--cyan);box-shadow:0 14px 40px rgba(2,119,182,.35)}
+  .card small{display:block;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--cyan)}
+  .card h3{font-family:var(--display);font-weight:400;font-size:clamp(34px,3.4vw,48px);letter-spacing:.04em;line-height:1}
+  .btn{display:inline-block;text-align:center;text-decoration:none;font-weight:600;font-size:14px;
+       padding:10px 22px;border-radius:4px;color:#fff;background:linear-gradient(90deg,var(--navy),var(--blue) 60%,var(--cyan));
+       transition:filter .2s,transform .2s}
+  .btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+  .btn.big{padding:14px 30px;font-size:16px}
+
+  /* Contact */
+  .contact{text-align:left}
+  .contact p{color:var(--ice);max-width:52ch;margin:26px 0 30px;font-size:clamp(16px,1.6vw,20px)}
+  .links{display:flex;gap:14px;flex-wrap:wrap}
+  footer{padding:36px clamp(20px,6vw,96px);text-align:center;color:rgba(203,240,248,.55);font-size:13px;border-top:1px solid rgba(72,203,228,.15)}
+
+  /* Apparition au scroll (le contenu reste visible sans JavaScript) */
+  .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+  .js .reveal.in{opacity:1;transform:none}
+
+
+  /* ---------- Effet 3D ---------- */
+  .hero{perspective:1300px;--mx:0;--my:0;--sx:1;--sy:1.2}
+  .stage{position:absolute;inset:0;transform-style:preserve-3d;
+          transform:rotateY(calc(var(--mx)*7deg)) rotateX(calc(var(--my)*-4deg))}
+  .hero h1{transform:translateZ(-150px) scale(1.13);
+           text-shadow:
+            calc(var(--sx)*1px) calc(var(--sy)*1px) 0 #0a8fd0,
+            calc(var(--sx)*2px) calc(var(--sy)*2px) 0 #0983c4,
+            calc(var(--sx)*3px) calc(var(--sy)*3px) 0 #087ab8,
+            calc(var(--sx)*4px) calc(var(--sy)*4px) 0 #0771ab,
+            calc(var(--sx)*5px) calc(var(--sy)*5px) 0 #06669d,
+            calc(var(--sx)*6px) calc(var(--sy)*6px) 0 #055c90,
+            calc(var(--sx)*7px) calc(var(--sy)*7px) 0 #045283,
+            calc(var(--sx)*8px) calc(var(--sy)*8px) 0 #044877,
+            calc(var(--sx)*9px) calc(var(--sy)*9px) 0 #033d6b,
+            calc(var(--sx)*10px) calc(var(--sy)*10px) 0 #03045E,
+            0 0 70px rgba(72,203,228,.28),
+            calc(var(--sx)*16px) calc(var(--sy)*16px) 28px rgba(0,0,0,.65)}
+  .hero .portrait{transform:translateX(-50%) translateZ(90px) scale(.93);
+                   filter:drop-shadow(0 30px 40px rgba(0,0,0,.6)) drop-shadow(0 0 40px rgba(72,203,228,.12))}
+  .floor{position:absolute;z-index:0;left:-25%;right:-25%;bottom:-6vh;height:62vh;
+          background-image:linear-gradient(rgba(72,203,228,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(72,203,228,.35) 1px,transparent 1px);
+          background-size:70px 70px;transform:translateZ(-260px) rotateX(74deg);transform-origin:50% 100%;
+          -webkit-mask-image:radial-gradient(60% 90% at 50% 100%,#000 0%,transparent 75%);mask-image:radial-gradient(60% 90% at 50% 100%,#000 0%,transparent 75%);
+          animation:floorMove 6s linear infinite;opacity:.55}
+  @keyframes floorMove{to{background-position:0 70px,70px 0}}
+  .orb{position:absolute;z-index:1;border-radius:50%;pointer-events:none;
+        background:radial-gradient(circle at 35% 30%,var(--ice),var(--cyan) 30%,var(--blue) 65%,var(--navy));
+        box-shadow:0 0 40px rgba(72,203,228,.5);animation:floaty 7s ease-in-out infinite}
+  .orb.a{width:clamp(36px,5vw,72px);aspect-ratio:1;left:14%;top:24%;transform:translateZ(200px)}
+  .orb.b{width:clamp(22px,3vw,44px);aspect-ratio:1;right:15%;top:58%;transform:translateZ(140px);animation-delay:-3s}
+  .orb.c{width:clamp(14px,2vw,26px);aspect-ratio:1;left:30%;top:68%;transform:translateZ(260px);animation-delay:-5s}
+  @keyframes floaty{50%{margin-top:-26px}}
+
+  /* Titres : face dégradée (::after) posée sur l'extrusion pleine (text-shadow) */
+  h2,.hero h1{color:#0a8fd0}
+  h2{position:relative;--sx:.5;--sy:.5;
+     text-shadow:1px 1px 0 var(--blue),2px 2px 0 #06659f,3px 3px 0 #05548a,4px 4px 0 #044275,5px 5px 0 var(--navy),9px 12px 22px rgba(0,0,0,.6)}
+  h2::after,.hero h1::after{content:attr(data-t);position:absolute;inset:-.25em 0 -.15em;padding:.25em 0 .15em;text-align:inherit;white-space:inherit;
+     text-shadow:none;background:linear-gradient(180deg,#fff 12%,#d3e9f6 38%,#5b8cbf 72%,#1b3a78 100%);
+     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .hero h1::after{padding-left:.13em}
+  .frame3d{perspective:1400px}
+  .frame{transform-origin:50% 100%;will-change:transform}
+  .card{transform-style:preserve-3d;will-change:transform;position:relative}
+  .card>div,.card .btn{transform:translateZ(34px)}
+  .card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;
+                 background:radial-gradient(260px circle at var(--gx,50%) var(--gy,0%),rgba(203,240,248,.22),transparent 60%)}
+  .card.tilting::before{opacity:1}
+  .card.tilting{transition:border-color .25s,box-shadow .25s;border-color:var(--cyan);box-shadow:0 24px 50px rgba(2,119,182,.45)}
+
+  /* Showreel : titre centré, le bas passe sous la vidéo */
+  #showreel .head{justify-content:center;text-align:center;margin-bottom:calc(-.3 * clamp(96px,17vw,240px));position:relative;z-index:1}
+  #showreel h2{font-size:clamp(96px,17vw,240px);line-height:1}
+  #showreel .frame3d{position:relative;z-index:2}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .about{grid-template-columns:1fr}
+    .menu{gap:18px}.nav-spacer{display:none}
+    .hero h1{font-size:min(28vh,20vw);top:33vh}
+    .hero .portrait{height:min(80vh,150vw);bottom:-2vh}
+  }
+  @media (max-width:520px){
+    .nav{padding:14px 16px}.menu{gap:14px}.menu a{font-size:12px}.logo{font-size:22px}
+    .hero h1{top:50vh;font-size:19vw}
+    .hero .portrait{height:min(74vh,118vw);bottom:-2vh}
+    h2,#showreel h2{font-size:clamp(64px,19vw,96px)}
+    #showreel .head{margin-bottom:-18px}
+    .grid{grid-template-columns:1fr}
+    .hero-foot{font-size:12px}
+  }
+  @media (prefers-reduced-motion:reduce){.floor,.orb{animation:none}html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="#accueil">NICO MP4</a>
+  <nav><ul class="menu">
+    <li><a href="#accueil">Accueil</a></li>
+    <li><a href="#showreel">Showreel</a></li>
+    <li><a href="#sfx">SFX</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul></nav>
+  <span class="nav-spacer"></span>
+</header>
+
+<main>
+  <!-- ACCUEIL -->
+  <section class="hero" id="accueil" aria-label="Accueil">
+    <div class="stage">
+      <div class="floor"></div>
+      <h1 data-t="Portfolio">Portfolio</h1>
+      <img class="portrait" src="assets/portrait.png" alt="Portrait de Nico MP4, monteur vidéo, en noir et blanc">
+      <span class="orb a"></span><span class="orb b"></span><span class="orb c"></span>
+    </div>
+    <div class="hero-foot">
+      <span>Montage Vidéo — Portfolio</span>
+      <span>Présenté par Nico MP4</span>
+    </div>
+  </section>
+
+  <!-- SHOWREEL -->
+  <section class="block" id="showreel">
+    <div class="head reveal">
+      <div>
+        <h2 data-t="Showreel">Showreel</h2>
+      </div>
+    </div>
+    <div class="frame3d"><div class="frame">
+      <video controls preload="metadata" playsinline poster="assets/showreel-poster.jpg">
+        <source src="assets/showreel.mp4" type="video/mp4">
+        Votre navigateur ne peut pas lire cette vidéo.
+      </video>
+    </div></div>
+  </section>
+
+  <!-- SFX -->
+  <section class="block" id="sfx">
+    <div class="reveal">
+      <h2 data-t="SFX">SFX</h2>
+      <p class="lead" style="margin-top:18px">Une sélection de SFX que j'utilise moi-même, à télécharger gratuitement.</p>
+    </div>
+    <div class="grid">
+      <article class="card reveal"><div><small>Pack SFX</small><h3>Partie #1</h3></div><a class="btn" href="https://nicomp4.gumroad.com/l/sfx-partie-1" target="_blank" rel="noopener">Clique Ici</a></article>
+      <article class="card reveal"><div><small>Pack SFX</small><h3>Partie #2</h3></div><a class="btn" href="https://nicomp4.gumroad.com/l/sfx-partie-2" target="_blank" rel="noopener">Clique Ici</a></article>
+      <article class="card reveal"><div><small>Pack SFX</small><h3>Partie #3</h3></div><a class="btn" href="https://nicomp4.gumroad.com/l/sfx-partie-3" target="_blank" rel="noopener">Clique Ici</a></article>
+      <article class="card reveal"><div><small>Pack SFX</small><h3>Partie #4</h3></div><a class="btn" href="https://nicomp4.gumroad.com/l/sfx-partie-4" target="_blank" rel="noopener">Clique Ici</a></article>
+      <article class="card reveal"><div><small>Pack SFX</small><h3>Partie #5</h3></div><a class="btn" href="https://nicomp4.gumroad.com/l/sfx-partie-5" target="_blank" rel="noopener">Clique Ici</a></article>
+      <article class="card reveal"><div><small>Pack SFX</small><h3>Partie #6</h3></div><a class="btn" href="https://nicomp4.gumroad.com/l/sfx-partie-6" target="_blank" rel="noopener">Clique Ici</a></article>
+      <article class="card reveal"><div><small>Pack SFX</small><h3>Partie #7</h3></div><a class="btn" href="https://nicomp4.gumroad.com/l/sfx-partie-7" target="_blank" rel="noopener">Clique Ici</a></article>
+      <article class="card reveal"><div><small>Pack SFX</small><h3>Partie #8</h3></div><a class="btn" href="https://nicomp4.gumroad.com/l/sfx-partie-8" target="_blank" rel="noopener">Clique Ici</a></article>
+      <article class="card reveal"><div><small>Pack SFX</small><h3>Partie #9</h3></div><a class="btn" href="https://nicomp4.gumroad.com/l/sfx-partie-9" target="_blank" rel="noopener">Clique Ici</a></article>
+      <article class="card reveal"><div><small>Pack SFX</small><h3>Partie #10</h3></div><a class="btn" href="https://nicomp4.gumroad.com/l/sfx-partie-10" target="_blank" rel="noopener">Clique Ici</a></article>
+      <article class="card reveal"><div><small>Pack SFX</small><h3>Partie #11</h3></div><a class="btn" href="https://nicomp4.gumroad.com/l/sfx-partie-11" target="_blank" rel="noopener">Clique Ici</a></article>
+      <article class="card reveal"><div><small>Pack SFX</small><h3>Partie #12</h3></div><a class="btn" href="https://nicomp4.gumroad.com/l/sfx-partie-12" target="_blank" rel="noopener">Clique Ici</a></article>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="block contact" id="contact">
+    <div class="reveal">
+      <h2 data-t="Contact">Contact</h2>
+      <p>Pour toute demande professionnelle ou collaboration, retrouve-moi ici.</p>
+      <div class="links">
+        <!-- À COMPLÉTER : ajoute tes vrais contacts en copiant ces lignes, par exemple :
+        <a class="btn big" href="mailto:TON-EMAIL@exemple.com">Email</a>
+        <a class="btn big" href="https://www.instagram.com/TON-COMPTE" target="_blank" rel="noopener">Instagram</a>
+        -->
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© <span id="year">2026</span> Nico MP4 — Montage Vidéo</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  } else {
+    els.forEach(el => el.classList.add('in'));
+  }
+
+  /* ----- Effet 3D ----- */
+  (function(){
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    const hero = document.querySelector('.hero');
+    let tx=0, ty=0, cx=0, cy=0, last=0;
+    hero.addEventListener('pointermove', e => {
+      const r = hero.getBoundingClientRect();
+      tx = ((e.clientX - r.left)/r.width - .5)*2;
+      ty = ((e.clientY - r.top)/r.height - .5)*2;
+      last = performance.now();
+    });
+    hero.addEventListener('pointerleave', () => { tx=0; ty=0; });
+    const frame = document.querySelector('.frame');
+    function tick(t){
+      if (matchMedia('(pointer:coarse)').matches || (last && t-last>4000 && !tx && !ty)) { /* écran tactile : léger balancement */
+        if (matchMedia('(pointer:coarse)').matches) { tx = Math.sin(t/2200)*.7; ty = Math.cos(t/2800)*.35; }
+      }
+      cx += (tx-cx)*.07; cy += (ty-cy)*.07;
+      hero.style.setProperty('--mx', cx.toFixed(3));
+      hero.style.setProperty('--my', cy.toFixed(3));
+      hero.style.setProperty('--sx', (0.8 + cx*1.2).toFixed(3));
+      hero.style.setProperty('--sy', (1.2 + cy*0.8).toFixed(3));
+      /* parallaxe au scroll : le titre recule, le portrait avance */
+      const sc = Math.min(window.scrollY, innerHeight);
+      hero.style.setProperty('--sc', sc);
+      /* showreel : l'écran se redresse en entrant */
+      const r = frame.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, (innerHeight - r.top) / (innerHeight*0.75)));
+      frame.style.transform = `rotateX(${((1-p)*16).toFixed(2)}deg) scale(${(0.9+0.1*p).toFixed(3)})`;
+      frame.style.opacity = (0.35+0.65*p).toFixed(2);
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    /* cartes SFX : inclinaison 3D + reflet qui suit la souris */
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        if (e.pointerType === 'touch') return;
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left)/r.width, y = (e.clientY - r.top)/r.height;
+        card.classList.add('tilting');
+        card.style.transform = `perspective(800px) rotateY(${((x-.5)*18).toFixed(2)}deg) rotateX(${((.5-y)*18).toFixed(2)}deg) translateZ(14px)`;
+        card.style.setProperty('--gx', (x*100)+'%'); card.style.setProperty('--gy', (y*100)+'%');
+      });
+      card.addEventListener('pointerleave', () => { card.classList.remove('tilting'); card.style.transform=''; });
+    });
+  })();
+</script>
+</body>
+</html>
