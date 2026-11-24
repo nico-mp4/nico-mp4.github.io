@@ -182,25 +182,24 @@
   .p-cam{right:2vw;top:12vw;width:10vw;transform:rotate(-8deg)}
   .p-mic{right:4vw;bottom:3vw;width:5vw;transform:rotate(10deg)}
 
-  /* MacBook qui s'ouvre au scroll */
-  .mac-scene{position:relative;z-index:2;perspective:2200px;perspective-origin:50% 6%;width:min(1040px,100%);margin:0 auto;padding-bottom:clamp(70px,14vw,170px)}
-  .mac-scene::after{content:"";position:absolute;left:6%;right:6%;bottom:clamp(20px,5vw,60px);height:14%;z-index:-1;
-        background:radial-gradient(ellipse at center,rgba(2,119,182,.5),transparent 70%);filter:blur(14px)}
-  .mac{position:relative;width:100%;transform-style:preserve-3d}
-  .lid{position:relative;transform-style:preserve-3d;transform-origin:50% 100%;
-       transform:translateY(-1px) rotateX(var(--a,6deg));will-change:transform}
+  /* MacBook Pro noir (vraie image) qui s'ouvre au scroll */
+  .mac-scene{position:relative;z-index:2;perspective:2200px;perspective-origin:50% 8%;width:min(1020px,100%);margin:0 auto;padding-bottom:clamp(30px,6vw,80px)}
+  .mac-scene::after{content:"";position:absolute;left:8%;right:8%;bottom:clamp(10px,3vw,40px);height:12%;z-index:-1;
+        background:radial-gradient(ellipse at center,rgba(2,119,182,.55),transparent 70%);filter:blur(16px)}
+  .mac{position:relative;width:100%;aspect-ratio:1020/820;transform-style:preserve-3d}
+  .lid{position:absolute;left:0;top:0;width:100%;height:67.56%;transform-style:preserve-3d;transform-origin:50% 100%;
+       transform:rotateX(var(--a,0deg));will-change:transform;z-index:1}
   .mac.closed .lid{pointer-events:none}
-  .lid-front{backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#05060b;border:2px solid #3a4668;
-        border-radius:16px 16px 4px 4px;padding:2.4% 2.4% 3.4%;box-shadow:0 0 0 1px rgba(72,203,228,.12)}
-  .lid-front video{display:block;width:100%;aspect-ratio:16/9;background:#000;border-radius:3px}
+  .lid-front{position:absolute;inset:0;background:url(assets/mac-lid.png) center/100% 100% no-repeat;
+       backface-visibility:hidden;-webkit-backface-visibility:hidden}
+  .lid-front video{position:absolute;left:12.16%;top:3.79%;width:75.69%;height:90.1%;object-fit:cover;background:#000}
+  .lid-front .notch{position:absolute;left:45.3%;top:3.7%;width:9.4%;height:3.1%;background:#05060a;border-radius:0 0 7px 7px;pointer-events:none}
   .lid-back{position:absolute;inset:0;transform:rotateY(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;
-        border-radius:16px 16px 4px 4px;background:linear-gradient(160deg,#e3e8f2,#98a2b9 70%,#7f8aa3);display:grid;place-items:center}
-  .lid-back .glow{width:9%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff,#CBF0F8 40%,#48CBE4 75%,transparent 76%);box-shadow:0 0 30px rgba(72,203,228,.6)}
-  .base{position:absolute;left:-3%;right:-3%;top:100%;aspect-ratio:1.8/1;transform-origin:50% 0;transform:rotateX(90deg);
-        background:linear-gradient(#d6ddea,#9ca6bc);border-radius:4px 4px 22px 22px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
-  .base .kb{position:absolute;left:7%;right:7%;top:9%;height:50%;border-radius:8px;background-color:#0b0f1a;
-        background-image:repeating-linear-gradient(90deg,transparent 0 3.6%,rgba(203,240,248,.14) 3.6% 4.3%),repeating-linear-gradient(0deg,transparent 0 18%,rgba(203,240,248,.14) 18% 21%)}
-  .base .pad{position:absolute;left:33%;right:33%;bottom:8%;height:24%;border-radius:10px;background:rgba(255,255,255,.22);border:1px solid rgba(60,70,100,.3)}
+       margin:0 .8%;border-radius:18px 18px 4px 4px;background:linear-gradient(160deg,#2c2d31,#141517 70%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);display:grid;place-items:center}
+  .lid-back .glow{width:9%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.5),rgba(255,255,255,.08) 60%,transparent 62%)}
+  .base{position:absolute;left:0;bottom:0;width:100%;height:33.9%;background:url(assets/mac-base.png) center/100% 100% no-repeat}
+  .base::after{content:"";position:absolute;inset:0;background:linear-gradient(#2b2c30,#131416);
+       -webkit-mask:url(assets/mac-base.png) center/100% 100% no-repeat;mask:url(assets/mac-base.png) center/100% 100% no-repeat;opacity:var(--cover,0)}
 
   /* ---------- Responsive ---------- */
   /* PC : un grand espace entre NICO et MP4 pour que ta tête ne cache pas les lettres */
@@ -329,10 +328,11 @@
               <source src="assets/showreel.mp4" type="video/mp4">
               Votre navigateur ne peut pas lire cette vidéo.
             </video>
+            <span class="notch"></span>
           </div>
           <div class="lid-back"><span class="glow"></span></div>
         </div>
-        <div class="base"><div class="kb"></div><div class="pad"></div></div>
+        <div class="base"></div>
       </div>
     </div>
   </section>
@@ -411,7 +411,8 @@
       const sr = scene.getBoundingClientRect();
       const p = Math.max(0, Math.min(1, (innerHeight*0.95 - sr.top) / (innerHeight*0.6)));
       const e = p*p*(3-2*p);
-      mac.style.setProperty('--a', (-90 + 96*e).toFixed(2) + 'deg');
+      mac.style.setProperty('--a', (-90 + 90*e).toFixed(2) + 'deg');
+      mac.style.setProperty('--cover', Math.max(0, 1 - e*2.6).toFixed(3));
       mac.classList.toggle('closed', p < 0.97);
       /* objets : léger décalage au scroll */
       secObjs.forEach(o => {
