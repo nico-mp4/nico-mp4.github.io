@@ -157,6 +157,10 @@
   #showreel .frame3d{position:relative;z-index:2}
 
   /* ---------- Responsive ---------- */
+  /* PC : un grand espace entre NICO et MP4 pour que ta tête ne cache pas les lettres */
+  @media (min-width:901px){
+    .hero h1{font-size:min(46vh,15.5vw);word-spacing:min(37vh,22vw)}
+  }
   @media (max-width:900px){
     .grid{grid-template-columns:repeat(2,1fr)}
     .about{grid-template-columns:1fr}
