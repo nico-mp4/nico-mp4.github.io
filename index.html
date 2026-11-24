@@ -183,7 +183,7 @@
   .p-mic{right:4vw;bottom:3vw;width:5vw;transform:rotate(10deg)}
 
   /* MacBook Pro noir (vraie image) qui s'ouvre au scroll */
-  .mac-scene{position:relative;z-index:2;perspective:2200px;perspective-origin:50% 8%;width:min(1020px,100%);margin:0 auto;padding-bottom:clamp(30px,6vw,80px)}
+  .mac-scene{position:relative;z-index:2;perspective:2200px;perspective-origin:50% 8%;width:min(1020px,100%);margin:0 auto;padding-bottom:clamp(0px,1vw,14px)}
   .mac-scene::after{content:"";position:absolute;left:8%;right:8%;bottom:clamp(10px,3vw,40px);height:12%;z-index:-1;
         background:radial-gradient(ellipse at center,rgba(2,119,182,.55),transparent 70%);filter:blur(16px)}
   .mac{position:relative;width:100%;aspect-ratio:1020/820;transform-style:preserve-3d}
@@ -199,6 +199,8 @@
   .base{position:absolute;left:0;bottom:0;width:100%;height:33.9%;background:url(assets/mac-base.png) center/100% 100% no-repeat}
   .base::after{content:"";position:absolute;inset:0;background:linear-gradient(#2b2c30,#131416);
        -webkit-mask:url(assets/mac-base.png) center/100% 100% no-repeat;mask:url(assets/mac-base.png) center/100% 100% no-repeat;opacity:var(--cover,0)}
+  #showreel{padding-bottom:clamp(0px,1vw,16px)}
+  #sfx{padding-top:clamp(10px,1.5vw,24px)}
 
   /* ---------- Responsive ---------- */
   /* PC : un grand espace entre NICO et MP4 pour que ta tête ne cache pas les lettres */
