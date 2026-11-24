@@ -156,12 +156,29 @@
   #showreel h2{font-size:clamp(96px,17vw,240px);line-height:1}
   #showreel .frame3d{position:relative;z-index:2}
 
+
+  /* Objets de montage vidéo flottants */
+  .obj{position:absolute;z-index:1;pointer-events:none}
+  .obj svg{display:block;width:100%;height:auto;overflow:visible;
+           filter:drop-shadow(0 22px 28px rgba(0,0,0,.55)) drop-shadow(0 0 22px rgba(72,203,228,.2));animation:bob 8s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(-14px)}}
+  .laptop{left:6vw;bottom:11vh;width:22vw;transform:translateZ(30px) rotateY(14deg) rotateX(3deg)}
+  .clap{right:9vw;top:19vh;width:10vw;transform:translateZ(50px) rotate(9deg)}.clap svg{animation-delay:-2s}
+  .phones{left:11vw;top:17vh;width:7vw;transform:translateZ(40px) rotate(-8deg)}.phones svg{animation-delay:-4s}
+  .wave{right:7vw;bottom:15vh;width:12vw;transform:translateZ(20px)}.wave svg{animation-delay:-1s}
+  .bar{transform-box:fill-box;transform-origin:center;animation:eq 1.6s ease-in-out infinite}
+  @keyframes eq{50%{transform:scaleY(.35)}}
+
   /* ---------- Responsive ---------- */
   /* PC : un grand espace entre NICO et MP4 pour que ta tête ne cache pas les lettres */
   @media (min-width:901px){
     .hero h1{font-size:min(46vh,15.5vw);word-spacing:min(37vh,22vw)}
   }
   @media (max-width:900px){
+    .laptop{left:50%;margin-left:-19vw;top:13vh;bottom:auto;width:38vw}
+    .clap{right:3vw;top:14vh;width:21vw}
+    .phones{left:3vw;top:15vh;width:19vw}
+    .wave{display:none}
     .grid{grid-template-columns:repeat(2,1fr)}
     .about{grid-template-columns:1fr}
     .menu{gap:18px}.nav-spacer{display:none}
@@ -177,7 +194,7 @@
     .grid{grid-template-columns:1fr}
     .hero-foot{font-size:12px}
   }
-  @media (prefers-reduced-motion:reduce){.floor,.orb{animation:none}html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}}
+  @media (prefers-reduced-motion:reduce){.floor,.orb,.obj svg,.bar{animation:none}html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -199,7 +216,42 @@
       <div class="floor"></div>
       <h1 data-t="NICO MP4">NICO MP4</h1>
       <img class="portrait" src="assets/portrait.png" alt="Portrait de Nico MP4, monteur vidéo, en noir et blanc">
-      <span class="orb a"></span><span class="orb b"></span><span class="orb c"></span>
+      <div class="obj laptop" aria-hidden="true"><svg viewBox="0 0 400 236" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfd6e4"/><stop offset="1" stop-color="#8f99b0"/></linearGradient>
+    <linearGradient id="gv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#03045E"/><stop offset="1" stop-color="#0277B6"/></linearGradient>
+  </defs>
+  <rect x="40" y="6" width="320" height="202" rx="12" fill="#0b0f1a" stroke="#3a4668" stroke-width="3"/>
+  <rect x="50" y="16" width="300" height="182" rx="4" fill="#06080e"/>
+  <rect x="50" y="16" width="300" height="14" fill="#10172a"/>
+  <circle cx="60" cy="23" r="2.5" fill="#48CBE4"/><circle cx="68" cy="23" r="2.5" fill="#0277B6"/><circle cx="76" cy="23" r="2.5" fill="#CBF0F8"/>
+  <rect x="58" y="36" width="152" height="84" rx="3" fill="url(#gv)"/>
+  <path d="M122 62 L122 94 L150 78 Z" fill="#fff" opacity=".92"/>
+  <rect x="216" y="36" width="126" height="84" rx="3" fill="#0b1226"/>
+  <g fill="#48CBE4" opacity=".75"><rect x="224" y="46" width="60" height="4" rx="2"/><rect x="224" y="58" width="96" height="4" rx="2"/><rect x="224" y="70" width="76" height="4" rx="2"/><rect x="224" y="82" width="104" height="4" rx="2"/><rect x="224" y="94" width="50" height="4" rx="2"/></g>
+  <rect x="50" y="124" width="300" height="74" fill="#0a0f1d"/>
+  <g stroke="#2a3558" stroke-width="1"><path d="M60 128v6M80 128v6M100 128v6M120 128v6M140 128v6M160 128v6M180 128v6M200 128v6M220 128v6M240 128v6M260 128v6M280 128v6M300 128v6M320 128v6M340 128v6"/></g>
+  <rect x="58" y="138" width="86" height="12" rx="2" fill="#0277B6"/><rect x="148" y="138" width="60" height="12" rx="2" fill="#48CBE4"/><rect x="212" y="138" width="102" height="12" rx="2" fill="#03045E" stroke="#0277B6"/>
+  <rect x="58" y="153" width="46" height="12" rx="2" fill="#CBF0F8"/><rect x="108" y="153" width="110" height="12" rx="2" fill="#0277B6"/><rect x="222" y="153" width="70" height="12" rx="2" fill="#48CBE4"/>
+  <rect x="58" y="170" width="150" height="9" rx="2" fill="#1d7f9a"/><rect x="212" y="170" width="100" height="9" rx="2" fill="#1d7f9a"/>
+  <rect x="58" y="182" width="120" height="9" rx="2" fill="#16607a"/><rect x="182" y="182" width="130" height="9" rx="2" fill="#16607a"/>
+  <path d="M176 124 v74" stroke="#fff" stroke-width="1.5"/><path d="M170 124 h12 l-6 8 z" fill="#fff"/>
+  <path d="M12 208 H388 L376 224 Q373 228 366 228 H34 Q27 228 24 224 Z" fill="url(#gb)"/>
+  <rect x="168" y="208" width="64" height="6" rx="3" fill="#7b869e"/>
+</svg></div>
+      <div class="obj clap" aria-hidden="true"><svg viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+  <rect x="12" y="66" width="176" height="116" rx="8" fill="#0b0f1a" stroke="#48CBE4" stroke-width="3"/>
+  <g fill="#48CBE4" opacity=".7"><rect x="28" y="92" width="70" height="6" rx="3"/><rect x="28" y="112" width="120" height="6" rx="3"/><rect x="28" y="132" width="96" height="6" rx="3"/><rect x="28" y="152" width="60" height="6" rx="3"/></g>
+  <g transform="rotate(-12 12 60)"><rect x="12" y="32" width="176" height="28" rx="5" fill="#0b0f1a" stroke="#CBF0F8" stroke-width="3"/>
+    <g fill="#CBF0F8"><path d="M30 32l20 0-16 28-20 0z"/><path d="M70 32l20 0-16 28-20 0z"/><path d="M110 32l20 0-16 28-20 0z"/><path d="M150 32l20 0-16 28-20 0z"/></g></g>
+</svg></div>
+      <div class="obj phones" aria-hidden="true"><svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+  <path d="M30 92 A50 54 0 0 1 130 92" fill="none" stroke="#CBF0F8" stroke-width="10" stroke-linecap="round"/>
+  <rect x="16" y="86" width="30" height="58" rx="13" fill="#0277B6"/><rect x="24" y="94" width="14" height="42" rx="7" fill="#03045E"/>
+  <rect x="114" y="86" width="30" height="58" rx="13" fill="#0277B6"/><rect x="122" y="94" width="14" height="42" rx="7" fill="#03045E"/>
+</svg></div>
+      <div class="obj wave" aria-hidden="true"><svg viewBox="0 0 160 80" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CBF0F8"/><stop offset="1" stop-color="#0277B6"/></linearGradient></defs><g fill="url(#gw)"><rect class="bar" style="animation-delay:-0.00s" x="4" y="28.0" width="6" height="24" rx="3"/><rect class="bar" style="animation-delay:-0.23s" x="15" y="18.0" width="6" height="44" rx="3"/><rect class="bar" style="animation-delay:-0.46s" x="26" y="25.0" width="6" height="30" rx="3"/><rect class="bar" style="animation-delay:-0.69s" x="37" y="10.0" width="6" height="60" rx="3"/><rect class="bar" style="animation-delay:-0.92s" x="48" y="21.0" width="6" height="38" rx="3"/><rect class="bar" style="animation-delay:-1.15s" x="59" y="5.0" width="6" height="70" rx="3"/><rect class="bar" style="animation-delay:-1.38s" x="70" y="17.0" width="6" height="46" rx="3"/><rect class="bar" style="animation-delay:-1.61s" x="81" y="12.0" width="6" height="56" rx="3"/><rect class="bar" style="animation-delay:-1.84s" x="92" y="24.0" width="6" height="32" rx="3"/><rect class="bar" style="animation-delay:-2.07s" x="103" y="8.0" width="6" height="64" rx="3"/><rect class="bar" style="animation-delay:-2.30s" x="114" y="20.0" width="6" height="40" rx="3"/><rect class="bar" style="animation-delay:-2.53s" x="125" y="15.0" width="6" height="50" rx="3"/><rect class="bar" style="animation-delay:-2.76s" x="136" y="27.0" width="6" height="26" rx="3"/><rect class="bar" style="animation-delay:-2.99s" x="147" y="22.0" width="6" height="36" rx="3"/></g></svg></div>
+      <span class="orb b"></span><span class="orb c"></span>
     </div>
     <div class="hero-foot">
       <span>Montage Vidéo — Portfolio</span>
